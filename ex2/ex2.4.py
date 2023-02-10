@@ -13,7 +13,7 @@ def func1(arr, low, high):
   func1(arr, pi + 1, high)
 
 def func2(array, start, end):
-  p = array[random.randint(low, high)]
+  p = array[random.randint(start, end)]
   low = start + 1
   high = end
   while True:
@@ -31,14 +31,19 @@ def func2(array, start, end):
 with open("ex2.json","r") as infile:
   json_obj = json.load(infile)
 
-results2 = []
+results1 = []
 for i in range(len(json_obj)):
   start = time.time()
   func1(json_obj[i], 0, len(json_obj[i])-1)
-  #quicksort_iterative1(json_obj[i])
   stop = time.time()
-  results2.append((len(json_obj[i]), stop-start))
+  results1.append((len(json_obj[i]), stop-start))
+  print(f"recursive: {stop-start}\n")
 
-print(results2)
-x2 = [i for i, t in results2]
-y2 = [t for i, t in results2]
+print(results1)
+x1 = [i for i, t in results1]
+y1 = [t for i, t in results1]
+
+plt.plot(x1, y1, 'b')
+plt.xlabel("Size of Input Array, n")
+plt.ylabel("Time, seconds")
+plt.show()
